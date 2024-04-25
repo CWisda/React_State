@@ -12,7 +12,8 @@ function App() {
         onSubmit={(event) => {
           event.preventDefault();
           setList(list => [...list, textInput]);
-          //setInputValue('');
+          //clearing input after adding new task
+          setTextInput('');
         }}
       >
         <label htmlFor="textInput">Enter Your Text:</label>
@@ -29,7 +30,15 @@ function App() {
       </form>
       <ul>
         {list.map((element, index, arr) => {
-          return <li key={index}>{element}</li>;
+          return <li>
+            <button onClick={() => {
+              const filteredList = textInput.filter(
+                (item, idx) => index != idx
+              );
+              setTextInput(filteredList);
+            }}>X</button>
+           <p key={index}>{element}</p>
+           </li>;
         })}
       </ul>
     </>
